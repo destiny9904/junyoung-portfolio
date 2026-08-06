@@ -168,6 +168,36 @@
   }
   .case-footer strong{ color:var(--text); font-weight:600; }
 
+  /* ---------- PROOF (live product screenshots) ---------- */
+  .proof{
+    margin-top:36px; padding-top:32px; border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:40px; flex-wrap:wrap;
+  }
+  .proof-text{ flex:1; min-width:180px; }
+  .proof-label{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .proof-label::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 3px rgba(232,163,61,0.18);
+  }
+  .proof-text p{ font-size:14px; color:var(--muted); max-width:240px; line-height:1.55; }
+  .proof-phones{ display:flex; gap:18px; }
+  .phone{
+    width:150px; border-radius:18px; overflow:hidden;
+    border:1px solid var(--line); background:#000;
+    box-shadow:0 16px 40px rgba(0,0,0,0.45);
+    transition:transform .3s ease;
+  }
+  .phone:hover{ transform:translateY(-6px); }
+  .phone img{ width:100%; display:block; }
+  @media (max-width:560px){
+    .proof{ flex-direction:column; align-items:flex-start; }
+    .proof-text p{ max-width:100%; }
+  }
+
   /* ---------- INTERPRETER / TRANSLATION SECTION ---------- */
   .translate-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:2px;
@@ -308,6 +338,21 @@
         <div class="flow-verb">Ship &amp; iterate</div>
         <h4>Released the verified product, then A/B-tested improvements.</h4>
         <p>Used an internal tool to control rollout across staging and production for credit-management features.</p>
+      </div>
+    </div>
+
+    <div class="proof">
+      <div class="proof-text">
+        <div class="proof-label">Still live</div>
+        <p>The comparison tool, largely unchanged since I shipped it in 2022 — same verification logic, same product.</p>
+      </div>
+      <div class="proof-phones">
+        <div class="phone">
+          <img src="img/finda-list.png" alt="Finda deposit comparison list, sorted by rate" loading="lazy">
+        </div>
+        <div class="phone">
+          <img src="img/finda-compare.png" alt="Finda side-by-side deposit comparison with verified net return" loading="lazy">
+        </div>
       </div>
     </div>
 
