@@ -272,6 +272,24 @@
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
   }
   :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .press-card{
+  display:flex; align-items:center; gap:16px;
+  max-width:480px; margin-top:36px; padding:14px;
+  background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  text-decoration:none; transition:border-color .2s ease, transform .2s ease;
+  }
+  .press-card:hover{ border-color:var(--accent-dim); transform:translateY(-2px); }
+  .press-card img{
+  width:88px; height:88px; object-fit:cover; border-radius:8px; flex-shrink:0;
+  }
+  .press-card .press-body{ display:flex; flex-direction:column; gap:6px; }
+  .press-card .press-source{
+    font-family:var(--mono); font-size:10.5px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .press-card .press-title{
+    font-size:13.5px; color:var(--text); line-height:1.4;
+  }
 </style>
 </head>
 <body>
@@ -450,7 +468,15 @@
     </div>
 
     <div class="case-footer">Promoted from intern to Associate Product Manager at month 10. Subscriber and conversion data compiled into <strong>investor-facing materials during the company's Series B raise</strong>, and the launch was later featured in <strong>Hankyung Job&amp;Joy</strong> (Jun 2021).</div>
-
+  
+    <a class="press-card" href="https://magazine.hankyung.com/job-joy/article/202105215549d" target="_blank" rel="noopener">
+      <img src="https://img.hankyung.com/photo/202105/AD.26413633.1.jpg" alt="Hankyung Job&Joy article thumbnail">
+      <div class="press-body">
+         <div class="press-source">Hankyung Job&Joy · Jun 2021</div>
+         <div class="press-title">"함께 만든 뉴스레터, 4개월 만에 구독자 1만 명을 달성했죠" — 황준영 퍼블리 인턴</div>
+      </div>
+    </a>
+    
     <div class="proof">
       <div class="proof-text">
         <div class="proof-label">What it became</div>
