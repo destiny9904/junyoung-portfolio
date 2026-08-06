@@ -77,6 +77,7 @@
     bottom:36px;
     font-family:var(--mono); font-size:11px; color:var(--muted2);
     letter-spacing:0.1em; z-index:2;
+    transition:opacity .3s ease;
     opacity:0; animation:fadeUp .8s ease forwards; animation-delay:2.6s;
   }
   @keyframes fadeUp{
@@ -481,7 +482,7 @@
     <div class="proof">
       <div class="proof-text">
         <div class="proof-label">What it became</div>
-        <p>The newsletter validated the demand. The company kept building. Careerly's App Store listing since. The product I shipped no longer exists in this form, but the product demonstrates my experiment turned out right.</p>
+        <p>The newsletter validated the demand. The company kept building.<br>The right image is Careerly's App Store listing since then. The product I shipped no longer exists in this form, but the product demonstrates my experiment turned out right.</p>
       </div>
       <div class="evidence-card">
         <img src="img/careerly3.jpg" alt="Careerly Vietnam App Store listing, developer: Publy Corp.">
@@ -533,6 +534,17 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:0.12});
   els.forEach(el=>io.observe(el));
+
+  // Hide scroll cue once user scrolls past the hero section
+  const heroEl = document.querySelector('.hero');
+  const scrollCue = document.querySelector('.scroll-cue');
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      scrollCue.style.opacity = entry.isIntersecting ? '' : '0';
+      scrollCue.style.pointerEvents = entry.isIntersecting ? '' : 'none';
+    });
+  }, { threshold: 0.3 });
+  heroObserver.observe(heroEl);
 
   const canvas = document.getElementById('constellation');
   const ctx = canvas.getContext('2d');
