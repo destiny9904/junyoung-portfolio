@@ -73,7 +73,7 @@
     opacity:0; animation:fadeUp .9s ease forwards; animation-delay:2.05s;
   }
   .scroll-cue{
-    position:fixed; left:50%; transform:translate(-50%, -50%); 
+    position:fixed; left:48%; transform:translate(-50%, -50%); 
     bottom:36px;
     font-family:var(--mono); font-size:11px; color:var(--muted2);
     letter-spacing:0.1em; z-index:2;
@@ -540,8 +540,13 @@
   const scrollCue = document.querySelector('.scroll-cue');
   const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      scrollCue.style.opacity = entry.isIntersecting ? '' : '0';
-      scrollCue.style.pointerEvents = entry.isIntersecting ? '' : 'none';
+      if (entry.isIntersecting) {
+        scrollCue.style.animation = '';
+        scrollCue.style.opacity = '';
+      } else {
+        scrollCue.style.animation = 'none';
+        scrollCue.style.opacity = '0';
+      }
     });
   }, { threshold: 0.3 });
   heroObserver.observe(heroEl);
