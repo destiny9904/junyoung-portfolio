@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Junyoung Hwang — Dots I've Connected</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2235%22 fill=%22%23E8A33D%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -154,10 +155,11 @@
   }
   .flow-step h4{ font-size:14.5px; font-weight:600; margin-bottom:8px; line-height:1.35;}
   .flow-step p{ font-size:12.8px; color:var(--muted); line-height:1.5;}
-  .flow-arrow{
-    position:absolute; right:0; top:6px; color:var(--muted2); font-family:var(--mono); font-size:15px;
+  .flow-step:not(:last-child)::after{
+    content:'→';
+    position:absolute; right:0; top:6px;
+    color:var(--muted2); font-family:var(--mono); font-size:15px;
   }
-  .flow-step:last-child .flow-arrow{display:none;}
 
   .case-footer{
     margin-top:32px; padding-top:24px; border-top:1px solid var(--line);
@@ -362,19 +364,16 @@
         <div class="flow-verb">Notice</div>
         <h4>Regulator data was the only source we were legally allowed to use.</h4>
         <p>Financial Services Commission testbed rules limited us to one government dataset.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Discover</div>
         <h4>Rates, terms, and minimums didn't match the banks' own listings.</h4>
         <p>Discrepancies showed up on the exact fields users would choose products by.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Verify at source</div>
         <h4>Checked every product directly against the institution.</h4>
         <p>100+ listings cross-checked with each bank; branch visits when online records weren't enough.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Ship &amp; iterate</div>
@@ -442,25 +441,21 @@
         <div class="flow-verb">Question</div>
         <h4>Which candidate country actually had a gap?</h4>
         <p>Compared Vietnam against other Southeast Asian markets on public data alone, with inconclusive results.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Go direct</div>
         <h4>Cold-messaged in-market professionals.</h4>
         <p>Reached Korean-company staff and local professionals already working in Vietnam.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Define the gap</div>
         <h4>Fast-growing industry, no localized content.</h4>
         <p>Vietnam's tech workforce was scaling with almost no in-language career content.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Ship the MVP</div>
         <h4>Launched a newsletter before building an app.</h4>
         <p>Validated demand cheaply, achieving 10K subscribers in 4 months, before committing engineering time.</p>
-        <div class="flow-arrow">→</div>
       </div>
       <div class="flow-step">
         <div class="flow-verb">Run it</div>
