@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Junyoung Hwang — Dots I've Connected</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D10;
+    --panel:#12151A;
+    --panel2:#171B21;
+    --text:#E7E5E0;
+    --muted:#8A8F98;
+    --muted2:#5B616B;
+    --accent:#E8A33D;
+    --accent-dim:#8C6A2E;
+    --line:#232830;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--accent); color:#0B0D10;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px clamp(20px,5vw,64px);
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;
+    color:var(--muted);
+    background:linear-gradient(to bottom, rgba(11,13,16,0.9), transparent);
+  }
+  nav .logo{color:var(--text); font-weight:600;}
+  nav .links{display:flex; gap:28px;}
+  nav .links a{color:var(--muted); text-decoration:none; transition:color .2s;}
+  nav .links a:hover{color:var(--accent);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:100vh; min-height:680px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:0 20px;
+  }
+  #constellation{position:absolute; inset:0; width:100%; height:100%;}
+  .hero-content{position:relative; z-index:2; max-width:780px;}
+  .hero .eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--accent);
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:22px;
+    opacity:0; animation:fadeUp .8s ease forwards; animation-delay:1.6s;
+  }
+  .hero h1{
+    font-family:var(--mono); font-weight:600;
+    font-size:clamp(32px,5.4vw,58px);
+    line-height:1.15; letter-spacing:-0.01em;
+    color:var(--text);
+    opacity:0; animation:fadeUp .9s ease forwards; animation-delay:1.8s;
+  }
+  .hero h1 .amber{color:var(--accent);}
+  .hero p.sub{
+    margin-top:22px; font-size:16.5px; color:var(--muted);
+    max-width:560px; margin-left:auto; margin-right:auto;
+    opacity:0; animation:fadeUp .9s ease forwards; animation-delay:2.05s;
+  }
+  .scroll-cue{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--muted2);
+    letter-spacing:0.1em; z-index:2;
+    opacity:0; animation:fadeUp .8s ease forwards; animation-delay:2.6s;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{
+    padding:110px clamp(20px,6vw,80px);
+    max-width:1180px; margin:0 auto;
+  }
+  .kicker{
+    font-family:var(--mono); font-size:12.5px; color:var(--accent);
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .kicker::before{content:''; width:22px; height:1px; background:var(--accent);}
+  h2.block-title{
+    font-family:var(--mono); font-weight:600;
+    font-size:clamp(24px,3.2vw,36px);
+    margin-bottom:16px; letter-spacing:-0.01em;
+  }
+  p.block-lede{ color:var(--muted); font-size:16px; max-width:640px; margin-bottom:56px;}
+
+  /* ---------- ROLES (Finda triple-role) ---------- */
+  .role-stack{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    margin-top:8px;
+  }
+  .role-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:26px 22px; position:relative; overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .role-card:hover{ transform:translateY(-4px); border-color:var(--accent-dim); }
+  .role-card .tag{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; display:block;
+  }
+  .role-card h3{ font-size:17px; font-weight:600; margin-bottom:8px; }
+  .role-card p{ font-size:14px; color:var(--muted); }
+  .role-note{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted2);
+    margin-top:18px; text-align:center;
+  }
+
+  /* ---------- CASE STUDY FLOW ---------- */
+  .case{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:clamp(28px,4vw,52px); margin-bottom:34px;
+  }
+  .case-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:20px; margin-bottom:38px;
+    border-bottom:1px solid var(--line); padding-bottom:28px;
+  }
+  .case-head h3{ font-family:var(--mono); font-size:22px; font-weight:600; }
+  .case-head .co{ color:var(--accent); }
+  .case-head .role-line{ color:var(--muted); font-size:13.5px; margin-top:6px; }
+  .case-stats{ display:flex; gap:30px; flex-wrap:wrap; }
+  .stat{ text-align:right; }
+  .stat .num{ font-family:var(--mono); font-size:26px; font-weight:600; color:var(--accent); }
+  .stat .label{ font-family:var(--mono); font-size:10.5px; color:var(--muted2); letter-spacing:0.05em; margin-top:2px; text-transform:uppercase;}
+
+  .flow{
+    display:flex; align-items:stretch; gap:0; overflow-x:auto;
+    padding-bottom:8px;
+  }
+  .flow-step{
+    flex:1; min-width:150px; position:relative; padding:0 22px 0 0;
+  }
+  .flow-step:last-child{padding-right:0;}
+  .flow-verb{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;
+  }
+  .flow-step h4{ font-size:14.5px; font-weight:600; margin-bottom:8px; line-height:1.35;}
+  .flow-step p{ font-size:12.8px; color:var(--muted); line-height:1.5;}
+  .flow-arrow{
+    position:absolute; right:0; top:6px; color:var(--muted2); font-family:var(--mono); font-size:15px;
+  }
+  .flow-step:last-child .flow-arrow{display:none;}
+
+  .case-footer{
+    margin-top:32px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:14.5px; color:var(--muted); font-style:normal;
+  }
+  .case-footer strong{ color:var(--text); font-weight:600; }
+
+  /* ---------- INTERPRETER / TRANSLATION SECTION ---------- */
+  .translate-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    background:var(--line); border-radius:12px; overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .translate-col{ background:var(--panel); padding:30px 28px;}
+  .translate-col .lbl{ font-family:var(--mono); font-size:11px; color:var(--muted2); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;}
+  .translate-col ul{ list-style:none; }
+  .translate-col li{ font-size:14.5px; color:var(--text); padding:9px 0; border-top:1px solid var(--line); }
+  .translate-col li:first-child{border-top:none;}
+  .translate-col.right .lbl{color:var(--accent);}
+
+  /* ---------- CLOSING ---------- */
+  footer{
+    padding:90px clamp(20px,6vw,80px) 60px;
+    text-align:center; border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+  footer h2{
+    font-family:var(--mono); font-weight:600; font-size:clamp(22px,3vw,30px);
+    max-width:600px; margin:0 auto 26px;
+  }
+  footer h2 .amber{color:var(--accent);}
+  .contact-links{ display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:8px;}
+  .contact-links a{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    text-decoration:none; border:1px solid var(--line); padding:10px 20px; border-radius:100px;
+    transition:all .2s ease;
+  }
+  .contact-links a:hover{ color:var(--accent); border-color:var(--accent-dim); }
+  footer .fine{ margin-top:50px; font-family:var(--mono); font-size:11px; color:var(--muted2); }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    .role-stack{ grid-template-columns:1fr; }
+    .case-head{flex-direction:column;}
+    .case-stats{gap:22px;}
+    .flow{flex-direction:column; gap:22px;}
+    .flow-step{padding-right:0;}
+    .flow-arrow{display:none;}
+    .translate-grid{grid-template-columns:1fr;}
+    nav .links{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">JH / DEPLOYMENT</div>
+  <div class="links">
+    <a href="#finda">Finda</a>
+    <a href="#publy">Publy</a>
+    <a href="#translate">Interpreter</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="constellation"></canvas>
+  <div class="hero-content">
+    <div class="eyebrow">Junyoung Hwang — Seoul, South Korea</div>
+    <h1>I've spent five years <span class="amber">connecting dots</span><br>nobody assigned me to connect.</h1>
+    <p class="sub">Product owner, researcher, translator, field liaison — usually all four in the same job. Two case studies below, from a fintech startup and a market-entry launch.</p>
+  </div>
+  <div class="scroll-cue">SCROLL ↓</div>
+</section>
+
+<section class="block reveal" id="roles">
+  <div class="kicker">One job, three roles</div>
+  <h2 class="block-title">At Finda, nobody split the work into neat lanes.</h2>
+  <p class="block-lede">Ten months, one fintech startup, one open-ended mandate: make the product trustworthy. That meant wearing three roles at once, not in sequence.</p>
+  <div class="role-stack">
+    <div class="role-card">
+      <span class="tag">Product Owner</span>
+      <h3>Shipped the product</h3>
+      <p>Launched a deposit/savings comparison tool end to end — scoping, data pipeline, release.</p>
+    </div>
+    <div class="role-card">
+      <span class="tag">Data Verifier</span>
+      <h3>Went to the source</h3>
+      <p>Found the regulator's data didn't match reality. Checked 100+ listings against banks directly — including in person.</p>
+    </div>
+    <div class="role-card">
+      <span class="tag">Researcher</span>
+      <h3>Fed the exec table</h3>
+      <p>Benchmarked U.S. fintech models by combining public data with direct calls to industry contacts.</p>
+    </div>
+  </div>
+  <div class="role-note">— all three, concurrently, reporting to the CEO —</div>
+</section>
+
+<section class="block reveal" id="finda">
+  <div class="kicker">Case 01 — Finda</div>
+  <h2 class="block-title">The data everyone trusted was quietly wrong.</h2>
+  <p class="block-lede">A regulator-approved dataset was the only legal source for deposit product terms. It didn't match what banks were actually offering — and nobody had checked.</p>
+
+  <div class="case">
+    <div class="case-head">
+      <div>
+        <h3><span class="co">Finda</span> — Deposit Comparison Tool</h3>
+        <div class="role-line">Product Owner · Jun 2022 – Mar 2023</div>
+      </div>
+      <div class="case-stats">
+        <div class="stat"><div class="num">100+</div><div class="label">Products verified</div></div>
+        <div class="stat"><div class="num">1</div><div class="label">Data source, by law</div></div>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-verb">Notice</div>
+        <h4>Regulator data was the only source we were legally allowed to use.</h4>
+        <p>Financial Services Commission testbed rules limited us to one government dataset.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Discover</div>
+        <h4>Rates, terms, and minimums didn't match the banks' own listings.</h4>
+        <p>Discrepancies showed up on the exact fields users would choose products by.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Verify at source</div>
+        <h4>Checked every product against the institution directly.</h4>
+        <p>100+ listings cross-checked with each bank; branch visits when online records weren't enough.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Ship &amp; iterate</div>
+        <h4>Released the verified product, then A/B-tested improvements.</h4>
+        <p>Used an internal tool to control rollout across staging and production for credit-management features.</p>
+      </div>
+    </div>
+
+    <div class="case-footer">Also on this team: researched overseas SOHO-lending models for a <strong>B2B2C partnership with Woowa Brothers and Kakao Mobility</strong>, then analyzed platform-activity data against credit indicators to validate the approach.</div>
+  </div>
+</section>
+
+<section class="block reveal" id="publy">
+  <div class="kicker">Case 02 — Publy</div>
+  <h2 class="block-title">Zero to one, in a market with almost no signal.</h2>
+  <p class="block-lede">Which Southeast Asian market to enter wasn't obvious from any dashboard. The answer came from calling strangers, not reading reports.</p>
+
+  <div class="case">
+    <div class="case-head">
+      <div>
+        <h3><span class="co">Publy</span> — Vietnam Market Entry</h3>
+        <div class="role-line">Associate Product Manager (promoted from intern) · Jun 2020 – Aug 2021</div>
+      </div>
+      <div class="case-stats">
+        <div class="stat"><div class="num">5</div><div class="label">Cold-outreach interviews</div></div>
+        <div class="stat"><div class="num">10K</div><div class="label">Subscribers, 4 months</div></div>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-verb">Question</div>
+        <h4>Which candidate country actually had a gap?</h4>
+        <p>Compared Vietnam against other Southeast Asian markets on public data alone — inconclusive.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Go direct</div>
+        <h4>Cold-messaged in-market professionals.</h4>
+        <p>Reached Korean-company staff and local professionals already working in Vietnam.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Define the gap</div>
+        <h4>Fast-growing industry, no localized content.</h4>
+        <p>Vietnam's tech workforce was scaling with almost no career content in-language.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Ship the MVP</div>
+        <h4>Launched a newsletter before building an app.</h4>
+        <p>Validated demand cheaply — 10,000 subscribers in 4 months — before committing engineering time.</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-verb">Run it</div>
+        <h4>Built onboarding, ran the team, hit the numbers.</h4>
+        <p>Notion-based onboarding for new users; led 3 Vietnam-based growth interns + 2 Korean engineers on 2-week sprints.</p>
+      </div>
+    </div>
+
+    <div class="case-footer">Promoted from intern to Associate Product Manager at 10 months. Subscriber and conversion data compiled into <strong>investor-facing materials during the company's Series B raise</strong>, and the launch was later featured in <strong>Hankyung Job&amp;Joy</strong> (Jun 2021).</div>
+  </div>
+</section>
+
+<section class="block reveal" id="translate">
+  <div class="kicker">The throughline</div>
+  <h2 class="block-title">Every job was a translation job.</h2>
+  <p class="block-lede">Fintech data into a product decision. A foreign market into a launch plan. And for three years, one language into another — for people who could not afford to be misunderstood.</p>
+
+  <div class="translate-grid">
+    <div class="translate-col">
+      <div class="lbl">Source</div>
+      <ul>
+        <li>Regulator data vs. bank reality</li>
+        <li>A market with almost no public signal</li>
+        <li>U.S. Congressional reports, dense defense reporting</li>
+        <li>Senior leadership, 10+ countries, live negotiations</li>
+      </ul>
+    </div>
+    <div class="translate-col right">
+      <div class="lbl">Delivered as</div>
+      <ul>
+        <li>A verified product users could trust</li>
+        <li>A newsletter MVP that proved demand</li>
+        <li>Briefs the field could act on same-day</li>
+        <li>Real-time interpretation, zero room for error</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="reveal">
+  <h2>I don't wait for a role to be defined. <span class="amber">I go find the dots.</span></h2>
+  <div class="contact-links">
+    <a href="mailto:junyounghwang1104@gmail.com">junyounghwang1104@gmail.com</a>
+    <a href="https://www.linkedin.com/in/junyoung-hwang-b7011b172/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="tel:+821083124790">+82-10-8312-4790</a>
+  </div>
+  <div class="fine">Seoul, South Korea — available immediately</div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.12});
+  els.forEach(el=>io.observe(el));
+
+  // Constellation hero animation: scattered dots labeled with role fragments,
+  // connecting into a single path over ~1.6s, then settling as ambient background.
+  const canvas = document.getElementById('constellation');
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR;
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W*DPR; canvas.height = H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const labels = ['PO','RESEARCH','VERIFY','TRANSLATE','INTERPRET','SHIP','FIELD','DATA'];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeNodes(){
+    const n = window.innerWidth < 760 ? 8 : 14;
+    const nodes = [];
+    for(let i=0;i<n;i++){
+      nodes.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        tx: 0, ty:0,
+        r: 2 + Math.random()*1.6,
+        label: labels[i % labels.length],
+        drift: Math.random()*Math.PI*2
+      });
+    }
+    // target path: a thin arc in the upper band, clear of the headline text
+    nodes.forEach((n_,i)=>{
+      const t = i/(nodes.length-1);
+      n_.tx = W*0.10 + t*W*0.80;
+      n_.ty = H*0.16 + Math.sin(t*Math.PI*1.3)*H*0.045;
+    });
+    return nodes;
+  }
+  let nodes = makeNodes();
+  window.addEventListener('resize', ()=>{ nodes = makeNodes(); });
+
+  let start = null;
+  const CONNECT_DELAY = 1650;   // ms before lines start drawing
+  const CONNECT_DURATION = 1400;
+
+  function draw(ts){
+    if(!start) start = ts;
+    const elapsed = ts - start;
+    ctx.clearRect(0,0,W,H);
+
+    const settleT = Math.min(1, elapsed/1300);
+    const ease = 1 - Math.pow(1-settleT, 3);
+
+    // current positions: drift -> lerp toward target as time passes
+    const pts = nodes.map((n_,i)=>{
+      const driftX = Math.sin((elapsed*0.0002)+n_.drift)*10;
+      const driftY = Math.cos((elapsed*0.00017)+n_.drift)*10;
+      const baseX = n_.x + (n_.tx-n_.x)*ease;
+      const baseY = n_.y + (n_.ty-n_.y)*ease;
+      return { x: baseX + driftX*(1-ease*0.7), y: baseY + driftY*(1-ease*0.7), label:n_.label };
+    });
+
+    // connecting line progress
+    const lineT = Math.max(0, Math.min(1, (elapsed-CONNECT_DELAY)/CONNECT_DURATION));
+    if(lineT > 0){
+      ctx.strokeStyle = 'rgba(232,163,61,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const segs = pts.length-1;
+      const fullSegs = Math.floor(lineT*segs);
+      for(let i=0;i<fullSegs;i++){
+        ctx.moveTo(pts[i].x, pts[i].y);
+        ctx.lineTo(pts[i+1].x, pts[i+1].y);
+      }
+      // partial last segment
+      const partial = (lineT*segs) - fullSegs;
+      if(fullSegs < segs && partial > 0){
+        const a = pts[fullSegs], b = pts[fullSegs+1];
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(a.x+(b.x-a.x)*partial, a.y+(b.y-a.y)*partial);
+      }
+      ctx.stroke();
+    }
+
+    // dots + labels
+    pts.forEach((p,i)=>{
+      const connected = lineT >= (i/(pts.length-1));
+      ctx.beginPath();
+      ctx.arc(p.x,p.y, connected?2.6:2, 0, Math.PI*2);
+      ctx.fillStyle = connected ? '#E8A33D' : 'rgba(138,143,152,0.45)';
+      ctx.fill();
+
+      if(elapsed > 700){
+        const labelOpacity = Math.max(0, Math.min(1, (elapsed-700-i*40)/500));
+        ctx.font = '9.5px IBM Plex Mono, monospace';
+        ctx.fillStyle = `rgba(138,143,152,${0.4*labelOpacity})`;
+        ctx.textAlign = 'center';
+        ctx.fillText(p.label, p.x, p.y-10);
+      }
+    });
+
+    if(!reduceMotion){ requestAnimationFrame(draw); }
+  }
+
+  if(reduceMotion){
+    // static settled state
+    start = 0;
+    draw(CONNECT_DELAY + CONNECT_DURATION + 1);
+  } else {
+    requestAnimationFrame(draw);
+  }
+</script>
+
+</body>
+</html>
